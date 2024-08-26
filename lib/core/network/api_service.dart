@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import '../../models/category.dart';
 import '../../models/banner.dart';
 import '../../models/product.dart';
-import '../../models/single_banner.dart';
 
 class ApiService {
   final String baseUrl = 'https://64bfc2a60d8e251fd111630f.mockapi.io/api/Todo';
@@ -38,16 +37,22 @@ class ApiService {
     }
   }
 
-  Future<List<BannerSingleModel>> fetchSingleBanners() async {
+  Future<BannerContent?> fetchSingleBanner() async {
     final response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
-      return data
-          .where((element) => element['type'] == 'banner_single')
-          .map((bannerJson) => BannerSingleModel.fromJson(bannerJson))
-          .toList();
+      // Find the first element with 'type' == 'banner_single'
+      var bannerJson = data.firstWhere(
+        (element) => element['type'] == 'banner_single',
+        orElse: () => null,
+      );
+      if (bannerJson != null) {
+        return BannerContent.fromJson(bannerJson);
+      } else {
+        return null; // No single banner found
+      }
     } else {
-      throw Exception('Failed to load single banners');
+      throw Exception('Failed to load single banner');
     }
   }
 

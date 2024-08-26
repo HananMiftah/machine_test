@@ -7,7 +7,22 @@ class ProductDao {
 
   Future<void> insertProduct(ProductModel product) async {
     final db = await _db;
-    await db.insert('products', product.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert(
+      'products',
+      product.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> insertProducts(List<ProductModel> products) async {
+    final db = await _db;
+    for (var product in products) {
+      await db.insert(
+        'products',
+        product.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
   }
 
   Future<List<ProductModel>> getProducts() async {

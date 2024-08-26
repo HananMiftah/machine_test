@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:machine_test/models/single_banner.dart';
 import '../core/network/api_service.dart';
 import '../core/database/category_dao.dart';
 import '../core/database/banner_dao.dart';
@@ -13,6 +14,7 @@ class HomeViewModel extends ChangeNotifier {
   List<CategoryModel> _categories = [];
   List<BannerModel> _banners = [];
   List<ProductModel> _products = [];
+  BannerContent? _singleBanner = null;
 
   bool _loading = false;
   String? _error;
@@ -24,6 +26,7 @@ class HomeViewModel extends ChangeNotifier {
 
   List<CategoryModel> get categories => _categories;
   List<BannerModel> get banners => _banners;
+  BannerContent? get singleBanner => _singleBanner;
   List<ProductModel> get products => _products;
   bool get loading => _loading;
   String? get error => _error;
@@ -36,15 +39,17 @@ class HomeViewModel extends ChangeNotifier {
     try {
       // Fetch categories from the API
       _categories = (await _apiService.fetchCategories());
-      // _categoryDao.insertCategory(_categories as CategoryModel);
+      _categoryDao.insertCategories(_categories);
 
       // Fetch banners from the API
       _banners = await _apiService.fetchBanners();
-      // _bannerDao.insertBanner(_banners as BannerModel);
+      _bannerDao.insertBanner(_banners as BannerModel);
 
       // Fetch products from the API
       _products = await _apiService.fetchProducts();
       // _productDao.insertProduct(_products as Product);
+
+      _singleBanner = await _apiService.fetchSingleBanner();
     } catch (e) {
       _error = e.toString();
       try {

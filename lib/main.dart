@@ -8,5 +8,6 @@ void main() {
   HttpOverrides.global = MyHttpOverrides();
   runApp(MaterialApp(
     home: HomeScreen(),
+    debugShowCheckedModeBanner: false
   ));
 }

@@ -23,16 +23,27 @@ class ProductWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Display the product title
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  product.title, // Display the product title
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      product.title, // Display the product title
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "View all",
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                    ),
+                  )
+                ],
               ),
               SizedBox(height: 8),
 
@@ -98,7 +109,7 @@ class ProductWidget extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  content.productName,
+                                  content.sku,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,

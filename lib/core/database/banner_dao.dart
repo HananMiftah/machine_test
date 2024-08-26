@@ -7,7 +7,22 @@ class BannerDao {
 
   Future<void> insertBanner(BannerModel banner) async {
     final db = await _db;
-    await db.insert('banners', banner.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert(
+      'banners',
+      banner.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> insertBanners(List<BannerModel> banners) async {
+    final db = await _db;
+    for (var banner in banners) {
+      await db.insert(
+        'banners',
+        banner.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
   }
 
   Future<List<BannerModel>> getBanners() async {
