@@ -55,10 +55,12 @@ class ApiService {
     final response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
-      return data
+      var products = data
           .where((element) => element['type'] == 'products')
           .map((e) => ProductModel.fromJson(e))
           .toList();
+      print(products[0].contents);
+      return products;
     } else {
       throw Exception('Failed to load products');
     }

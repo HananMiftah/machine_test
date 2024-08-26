@@ -3,16 +3,14 @@ import 'package:machine_test/models/single_banner.dart';
 import '../../models/banner.dart';
 
 class SingleBannerWidget extends StatelessWidget {
-  final BannerContent  banner;
+  final BannerContent banner;
 
   SingleBannerWidget({required this.banner});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
           image: NetworkImage(banner.imageUrl),
           fit: BoxFit.cover,
