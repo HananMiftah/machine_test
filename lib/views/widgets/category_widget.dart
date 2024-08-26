@@ -38,9 +38,7 @@ class CategoryWidget extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       "View all",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black),
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   )
                 ],

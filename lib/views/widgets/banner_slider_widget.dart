@@ -55,7 +55,9 @@ class _BannerSliderWidgetState extends State<BannerSliderWidget> {
                 height: _currentIndex == index ? 12.0 : 8.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: _currentIndex == index ? const Color.fromARGB(255, 33, 243, 166) : Colors.grey,
+                  color: _currentIndex == index
+                      ? const Color.fromARGB(255, 33, 243, 166)
+                      : Colors.grey,
                 ),
               );
             }),
